@@ -142,7 +142,7 @@ type Model struct {
 	Validate ValidateFunc
 
 	// rune sanitizer for input.
-	rsan runeutil.Sanitizer
+	Sanitizer runeutil.Sanitizer
 
 	// Should the input suggest to complete
 	ShowSuggestions bool
@@ -265,15 +265,15 @@ func (m *Model) SetSuggestions(suggestions []string) {
 	m.updateSuggestions()
 }
 
-// rsan initializes or retrieves the rune sanitizer.
+// san initializes or retrieves the rune sanitizer.
 func (m *Model) san() runeutil.Sanitizer {
-	if m.rsan == nil {
+	if m.Sanitizer == nil {
 		// Textinput has all its input on a single line so collapse
 		// newlines/tabs to single spaces.
-		m.rsan = runeutil.NewSanitizer(
+		m.Sanitizer = runeutil.NewSanitizer(
 			runeutil.ReplaceTabs(" "), runeutil.ReplaceNewlines(" "))
 	}
-	return m.rsan
+	return m.Sanitizer
 }
 
 func (m *Model) insertRunesFromUserInput(v []rune) {

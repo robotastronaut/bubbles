@@ -243,7 +243,7 @@ type Model struct {
 	viewport *viewport.Model
 
 	// rune sanitizer for input.
-	rsan runeutil.Sanitizer
+	Sanitizer runeutil.Sanitizer
 }
 
 // New creates a new model with default settings.
@@ -574,12 +574,12 @@ func (m *Model) Reset() {
 
 // san initializes or retrieves the rune sanitizer.
 func (m *Model) san() runeutil.Sanitizer {
-	if m.rsan == nil {
+	if m.Sanitizer == nil {
 		// Textinput has all its input on a single line so collapse
 		// newlines/tabs to single spaces.
-		m.rsan = runeutil.NewSanitizer()
+		m.Sanitizer = runeutil.NewSanitizer()
 	}
-	return m.rsan
+	return m.Sanitizer
 }
 
 // deleteBeforeCursor deletes all text before the cursor. Returns whether or
